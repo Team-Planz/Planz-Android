@@ -59,7 +59,7 @@ inline fun <T, R> NetworkResult<T>.mapCatching(transform: (T) -> R): NetworkResu
         is NetworkResult.Loading -> NetworkResult.Loading
     }
 
-inline fun <T, R> NetworkResult<T>.zip(other: R): NetworkResult<Pair<T, R>> =
+fun <T, R> NetworkResult<T>.zip(other: R): NetworkResult<Pair<T, R>> =
     when (this) {
         is NetworkResult.Success -> NetworkResult.Success(data to other)
         is NetworkResult.Error -> NetworkResult.Error(this.exception)

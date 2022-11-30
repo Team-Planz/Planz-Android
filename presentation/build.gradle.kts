@@ -15,9 +15,6 @@ android {
     compileSdk = Configs.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Configs.MIN_SDK
-        targetSdk = Configs.TARGET_SDK
-
         vectorDrawables {
             useSupportLibrary = true
         }
