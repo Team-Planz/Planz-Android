@@ -8,6 +8,8 @@ import com.yapp.growth.presentation.ui.createPlan.date.DateContract.DateEvent
 import com.yapp.growth.presentation.ui.createPlan.date.DateContract.DateSideEffect
 import com.yapp.growth.presentation.ui.createPlan.date.DateContract.DateViewState
 import com.yapp.growth.presentation.util.ResourceProvider
+import com.yapp.growth.presentation.util.toThreeYearsAgoDate
+import com.yapp.growth.presentation.util.toThreeYearsLaterDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,6 +65,12 @@ class DateViewModel @Inject constructor(
     }
 
     private fun updateDateState(event: DateEvent) {
+
+        // 달력은 현 날짜를 기준, 전후 3년까지만 표기되어야 한다.
+        val today = CalendarDay.today().date
+        val maximumDate = CalendarDay.from(today.toThreeYearsLaterDate())
+        val minimumDate = CalendarDay.from(today.toThreeYearsAgoDate())
+
         var month = _currentDate.value.month + 1
         var year = _currentDate.value.year
 
@@ -84,6 +92,13 @@ class DateViewModel @Inject constructor(
             else -> {}
         }
 
-        _currentDate.value = CalendarDay.from(year, month - 1, 1)
+        var updatedDate: CalendarDay = CalendarDay.from(year, month - 1, 1)
+
+        when {
+            updatedDate.isBefore(minimumDate) -> { updatedDate = minimumDate }
+            updatedDate.isAfter(maximumDate) -> { updatedDate = maximumDate }
+        }
+
+        _currentDate.value = CalendarDay.from(updatedDate.year, updatedDate.month, 1)
     }
 }

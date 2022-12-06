@@ -21,6 +21,8 @@ import com.yapp.growth.presentation.ui.main.home.HomeContract.MonthlyPlanModeSta
 import com.yapp.growth.presentation.util.ResourceProvider
 import com.yapp.growth.presentation.util.toDate
 import com.yapp.growth.presentation.util.toFormatDate
+import com.yapp.growth.presentation.util.toThreeYearsAgoDate
+import com.yapp.growth.presentation.util.toThreeYearsLaterDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -252,6 +254,12 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun updateCurrentDateState(event: HomeEvent) {
+
+        // 달력은 현 날짜를 기준, 전후 3년까지만 표기되어야 한다.
+        val today = CalendarDay.today().date
+        val maximumDate = CalendarDay.from(today.toThreeYearsLaterDate())
+        val minimumDate = CalendarDay.from(today.toThreeYearsAgoDate())
+
         var month = _currentDate.value.month + 1
         var year = _currentDate.value.year
 
@@ -273,7 +281,14 @@ class HomeViewModel @Inject constructor(
             else -> {}
         }
 
-        _currentDate.value = CalendarDay.from(year, month - 1, 1)
+        var updatedDate: CalendarDay = CalendarDay.from(year, month - 1, 1)
+
+        when {
+            updatedDate.isBefore(minimumDate) -> { updatedDate = minimumDate }
+            updatedDate.isAfter(maximumDate) -> { updatedDate = maximumDate }
+        }
+
+        _currentDate.value = CalendarDay.from(updatedDate.year, updatedDate.month, 1)
     }
 
     // TODO : 임시, 추후 로직 수정 필요!
