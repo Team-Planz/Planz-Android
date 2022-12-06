@@ -31,6 +31,20 @@ fun Date.toCalculateDiffDay(other: Date): Long {
     return (other.time - this.time) / (60 * 60 * 24 * 1000)
 }
 
+fun Date.toThreeYearsAgoDate(): Date {
+    return Calendar.getInstance().apply {
+        time = this@toThreeYearsAgoDate
+        add(Calendar.YEAR, -3)
+    }.time
+}
+
+fun Date.toThreeYearsLaterDate(): Date {
+    return Calendar.getInstance().apply {
+        time = this@toThreeYearsLaterDate
+        add(Calendar.YEAR, 3)
+    }.time
+}
+
 fun String.toDate(): Date {
     return PARSE_DATE_FORMAT.parse(this) ?: Date()
 }
