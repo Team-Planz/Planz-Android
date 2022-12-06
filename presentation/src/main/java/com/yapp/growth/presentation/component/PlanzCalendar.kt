@@ -1,17 +1,18 @@
 package com.yapp.growth.presentation.component
 
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.yapp.growth.presentation.ui.main.home.CalendarDecorator
+import com.yapp.growth.presentation.util.toThreeYearsAgoDate
+import com.yapp.growth.presentation.util.toThreeYearsLaterDate
 
 @Composable
 fun PlanzCalendar(
@@ -32,7 +33,12 @@ fun PlanzCalendar(
                 this.topbarVisible = false
                 this.isPagingEnabled = false
 
-                when(selectMode) {
+                this.state().edit()
+                    .setMinimumDate(CalendarDay.today().date.toThreeYearsAgoDate())
+                    .setMaximumDate(CalendarDay.today().date.toThreeYearsLaterDate())
+                    .commit()
+
+                when (selectMode) {
                     PlanzCalendarSelectMode.SINGLE -> {
                         this.selectionMode = MaterialCalendarView.SELECTION_MODE_SINGLE
                         this.showOtherDates = MaterialCalendarView.SHOW_OTHER_MONTHS
@@ -51,8 +57,8 @@ fun PlanzCalendar(
                 this.setOnDateChangedListener(onDateSelectedListener)
                 this.removeDecorators()
 
-                if(selectedDates.isNotEmpty()) {
-                    for(selectDate in selectedDates) {
+                if (selectedDates.isNotEmpty()) {
+                    for (selectDate in selectedDates) {
                         this.setDateSelected(selectDate, true)
                     }
                 }
@@ -60,22 +66,36 @@ fun PlanzCalendar(
                 this.addDecorator(CalendarDecorator.SelectDecorator(context, this))
                 this.addDecorator(CalendarDecorator.SundayDecorator())
 
-                when(selectMode) {
+                when (selectMode) {
                     PlanzCalendarSelectMode.SINGLE -> {
                         monthlyDates.forEach {
                             if (it.key != CalendarDay.today()) {
                                 when (it.value) {
                                     1 -> this.addDecorator(CalendarDecorator.SingleDotDecorator(it.key))
                                     2 -> this.addDecorator(CalendarDecorator.DoubleDotDecorator(it.key))
-                                    else -> this.addDecorator(CalendarDecorator.TripleDotDecorator(it.key))
+                                    else -> this.addDecorator(
+                                        CalendarDecorator.TripleDotDecorator(
+                                            it.key
+                                        )
+                                    )
                                 }
                             }
                         }
                         this.addDecorator(CalendarDecorator.TodayDecorator(context))
-                        this.addDecorator(CalendarDecorator.OtherMonthDisableSelectionDecorator(context, this))
+                        this.addDecorator(
+                            CalendarDecorator.OtherMonthDisableSelectionDecorator(
+                                context,
+                                this
+                            )
+                        )
                     }
                     PlanzCalendarSelectMode.MULTIPLE -> {
-                        this.addDecorator(CalendarDecorator.SelectedDatesDecorator(context, this.selectedDates))
+                        this.addDecorator(
+                            CalendarDecorator.SelectedDatesDecorator(
+                                context,
+                                this.selectedDates
+                            )
+                        )
                         this.addDecorator(CalendarDecorator.TodayBoldDecorator())
                         this.addDecorator(CalendarDecorator.TodayLessDecorator(context))
                     }
