@@ -1,4 +1,4 @@
-# 20th-Android-Team-1-FE 플랜즈
+# 정말 편리한 약속잡기, 관리 서비스 플랜즈
 
 ![screen1](https://user-images.githubusercontent.com/33443660/183038971-0e87d601-16d9-485a-857e-031ae9fa285e.png)
 
@@ -43,3 +43,8 @@
 ![image](https://user-images.githubusercontent.com/33443660/183053485-631a62f7-1422-479b-88d5-5a1860472a13.png)<br>
 - 100 % Jetpack Compose
 - Coroutines
+
+<br>
+
+ ## 저희는 [YAPP](https://www.yapp.co.kr) Android 1팀에서 시작된 프로젝트예요!
+ 🙋‍♀️ 출시까지의 Android 파트 여정이 궁금하신 분들은 [여기](https://github.com/YAPP-Github/20th-Android-Team-1-FE)로 오시면 보실 수 있을 거예요! :)
