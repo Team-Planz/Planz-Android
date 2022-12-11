@@ -33,6 +33,8 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
             isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+            manifestPlaceholders["appName"] = Configs.APP_NAME + ".Debug"
         }
 
         release {
@@ -41,6 +43,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            manifestPlaceholders["appName"] = Configs.APP_NAME
         }
     }
     compileOptions {
