@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath(ProjectDependencies.ANDROID_BUILD_TOOL)
+        classpath(ProjectDependencies.ANDROID_GRADLE_PLUGIN)
         classpath(ProjectDependencies.KOTLIN_GRADLE_PLUGIN)
         classpath(ProjectDependencies.HILT_GRADLE_PLUGIN)
         classpath(ProjectDependencies.FIREBASE_CRASHLYTICS)
