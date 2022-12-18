@@ -8,4 +8,7 @@ object Configs {
     const val TARGET_SDK                = 32
     const val VERSION_CODE              = 220805001
     const val VERSION_NAME              = "1.1.1"
+
+    // App Info
+    const val APP_NAME                  = "플랜즈"
 }
