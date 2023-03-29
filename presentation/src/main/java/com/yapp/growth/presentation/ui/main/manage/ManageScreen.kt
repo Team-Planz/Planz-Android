@@ -329,14 +329,15 @@ fun ManagePlansItem(
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
+                    ManageLeaderBadge(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        isLeader = plan.isLeader
+                    )
+
                     Text(
                         text = plan.title,
                         style = PlanzTypography.subtitle1,
                         color = Gray900
-                    )
-                    ManageLeaderBadge(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        isLeader = plan.isLeader
                     )
                 }
 
