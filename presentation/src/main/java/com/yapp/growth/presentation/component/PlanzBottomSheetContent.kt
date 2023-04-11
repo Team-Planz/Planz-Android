@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -80,26 +79,26 @@ fun PlanzParticipantBottomSheetContent(
             )
         }
 
-        if (respondUserText.isNotEmpty()) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.planz_component_participant_bottom_sheet_content_respondent),
-                    style = PlanzTypography.subtitle2,
-                    color = Gray700
-                )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.planz_component_participant_bottom_sheet_content_respondent),
+                style = PlanzTypography.subtitle2,
+                color = Gray700
+            )
 
-                Text(
-                    text = respondUserText.toString(),
-                    style = PlanzTypography.caption,
-                    color = Gray800,
-                    textAlign = TextAlign.End
-                )
-            }
+            Text(
+                text = if (respondUserText.isNotEmpty()) respondUserText.toString() else stringResource(
+                    id = R.string.planz_component_participant_bottom_sheet_content_empty
+                ),
+                style = PlanzTypography.caption,
+                color = Gray800,
+                textAlign = TextAlign.End
+            )
         }
 
         if (isLeader) {
