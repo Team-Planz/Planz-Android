@@ -51,7 +51,10 @@ fun FixPlanScreen(
         scaffoldState = scaffoldState,
         sheetContent = {
             if (uiState.bottomSheet == FixPlanContract.FixPlanViewState.BottomSheet.RESPONDENT) {
-                PlanzRespondentBottomSheetContent(respondents = uiState.respondents)
+                PlanzRespondentBottomSheetContent(
+                    promisingName = uiState.timeTable.promisingName,
+                    respondents = uiState.respondents
+                )
             } else {
                 FixPlanParticipantBottomSheetContent(
                     timeTable = uiState.timeTable,

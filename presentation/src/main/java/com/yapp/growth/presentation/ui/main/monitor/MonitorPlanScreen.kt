@@ -52,7 +52,10 @@ fun MonitorPlanScreen(
         scaffoldState = scaffoldState,
         sheetContent = {
             if (uiState.bottomSheet == MonitorPlanContract.MonitorPlanViewState.BottomSheet.RESPONDENT) {
-                PlanzRespondentBottomSheetContent(respondents = uiState.respondents)
+                PlanzRespondentBottomSheetContent(
+                    promisingName = uiState.timeTable.promisingName,
+                    respondents = uiState.respondents
+                )
             } else {
                 MonitorPlanBottomSheetContent(
                     timeTable = uiState.timeTable,
