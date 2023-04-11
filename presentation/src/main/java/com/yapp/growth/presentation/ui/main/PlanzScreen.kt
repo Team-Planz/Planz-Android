@@ -533,7 +533,7 @@ fun PlanzBottomSheetContent(
                     style = PlanzTypography.h3
                 )
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit_20),
                     tint = Color.Unspecified,
                     contentDescription = null,
                     modifier = Modifier

@@ -63,7 +63,7 @@ fun PlanzCreateStepTitle(
                 }
 
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = com.yapp.growth.presentation.R.drawable.ic_exit),
+                    imageVector = ImageVector.vectorResource(id = com.yapp.growth.presentation.R.drawable.ic_exit_20),
                     tint = Color.Unspecified,
                     contentDescription = null,
                     modifier = Modifier

@@ -113,7 +113,7 @@ fun ShareScreen(
                     .padding(top = 26.dp)
                     .padding(end = 20.dp)
                     .clickable { viewModel.setEvent(ShareContract.ShareEvent.OnClickExit) },
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit_20),
                 contentDescription = stringResource(id = R.string.icon_exit_content_description),
                 tint = Color.Unspecified,
             )

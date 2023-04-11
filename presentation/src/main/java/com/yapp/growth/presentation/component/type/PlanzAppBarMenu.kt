@@ -18,7 +18,7 @@ enum class PlanzAppBarMenu(
     ),
     EXIT(
         horizontalPadding = 20.dp,
-        icon = R.drawable.ic_exit,
+        icon = R.drawable.ic_exit_20,
         contentDescription = R.string.icon_exit_content_description
     ),
     SHARE(
