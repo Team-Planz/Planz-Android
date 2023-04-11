@@ -60,7 +60,13 @@ fun MonitorPlanScreen(
                     title = if (uiState.loadState == LoadState.SUCCESS) uiState.timeTable.promisingName else stringResource(
                         R.string.monitor_plan_title
                     ),
-                    onClickShareIcon = { onDynamicLinkClick(context = context, id = uiState.planId.toString()) },
+                    onClickUserIcon = { viewModel.setEvent(MonitorPlanEvent.OnClickUserIcon) },
+                    onClickShareIcon = {
+                        onDynamicLinkClick(
+                            context = context,
+                            id = uiState.planId.toString()
+                        )
+                    },
                     onClickExitIcon = { viewModel.setEvent(MonitorPlanEvent.OnClickBackButton) },
                     isLoading = uiState.loadState == LoadState.LOADING
                 )
@@ -141,7 +147,6 @@ fun MonitorPlanScreen(
             BackHandler(enabled = sheetState.isExpanded) {
                 coroutineScope.launch { sheetState.collapse() }
             }
-
         }
     }
 }

@@ -56,6 +56,7 @@ fun PlanzExitAppBar(
 fun PlanzColorTextWithExitAppBar(
     modifier: Modifier = Modifier,
     title: String,
+    onClickUserIcon: () -> Unit,
     onClickExitIcon: () -> Unit,
     onClickShareIcon: () -> Unit,
     isLoading: Boolean,
@@ -63,8 +64,8 @@ fun PlanzColorTextWithExitAppBar(
     PlanzColorTextAppBar(
         modifier = modifier,
         title = title,
-        actionMenus = listOf(PlanzAppBarMenu.SHARE, PlanzAppBarMenu.EXIT),
-        onClickActionIcons = listOf(onClickShareIcon, onClickExitIcon),
+        actionMenus = listOf(PlanzAppBarMenu.USER, PlanzAppBarMenu.SHARE, PlanzAppBarMenu.EXIT),
+        onClickActionIcons = listOf(onClickUserIcon, onClickShareIcon, onClickExitIcon),
         isLoading = isLoading
     )
 }
@@ -219,6 +220,7 @@ fun PlanzExitAppBarPreview() {
 fun PreviewPlanzColorTextWithExitAppBar() {
     PlanzColorTextWithExitAppBar(
         title = "식사",
+        onClickUserIcon = {},
         onClickShareIcon = {},
         onClickExitIcon = {},
         isLoading = false
