@@ -77,12 +77,13 @@ fun PlanzMenuAppBar(
             style = PlanzTypography.h3,
             color = Gray900,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
         )
 
         Row(
             modifier = Modifier.align(Alignment.CenterEnd),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             actionMenus.forEachIndexed { index, menu ->
                 Icon(

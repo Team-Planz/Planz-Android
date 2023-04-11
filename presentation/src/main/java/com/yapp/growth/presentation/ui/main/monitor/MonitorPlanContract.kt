@@ -7,7 +7,6 @@ import com.yapp.growth.base.ViewState
 import com.yapp.growth.domain.entity.Category
 import com.yapp.growth.domain.entity.TimeTable
 import com.yapp.growth.domain.entity.User
-import com.yapp.growth.presentation.ui.main.fix.FixPlanContract
 
 class MonitorPlanContract {
     data class MonitorPlanViewState(
@@ -28,7 +27,7 @@ class MonitorPlanContract {
             emptyList(),
             "",
             "",
-            Category(0,"",""),
+            Category(0, "", ""),
         ),
         val currentClickTimeIndex: Pair<Int, Int> = -1 to -1,
         val currentClickUserData: List<User> = emptyList(),
@@ -53,7 +52,8 @@ class MonitorPlanContract {
         object OnClickBackButton : MonitorPlanEvent()
         object OnClickNextDayButton : MonitorPlanEvent()
         object OnClickPreviousDayButton : MonitorPlanEvent()
-        object OnClickExitIcon : MonitorPlanEvent()
+        object OnClickExitButton : MonitorPlanEvent()
+        object OnClickUserButton : MonitorPlanEvent()
         data class OnClickTimeTable(val dateIndex: Int, val minuteIndex: Int) : MonitorPlanEvent()
         object OnClickErrorRetryButton : MonitorPlanEvent()
         object OnClickAvailableColorBox : MonitorPlanEvent()

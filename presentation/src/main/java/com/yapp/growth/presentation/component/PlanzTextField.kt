@@ -102,7 +102,7 @@ fun PlanzBasicTextField(
         trailingIcon = {
             Icon(
                 modifier = Modifier.clickable { onDeleteClicked() },
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit_20),
                 contentDescription = stringResource(id = R.string.icon_clear_content_description),
                 tint = when (textState) {
                     TextInputState.EMPTY -> Gray300

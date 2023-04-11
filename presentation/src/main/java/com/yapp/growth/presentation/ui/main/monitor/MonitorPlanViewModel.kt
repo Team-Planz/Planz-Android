@@ -12,7 +12,9 @@ import com.yapp.growth.domain.onError
 import com.yapp.growth.domain.onSuccess
 import com.yapp.growth.domain.usecase.GetRespondUsersUseCase
 import com.yapp.growth.presentation.ui.main.KEY_PLAN_ID
-import com.yapp.growth.presentation.ui.main.monitor.MonitorPlanContract.*
+import com.yapp.growth.presentation.ui.main.monitor.MonitorPlanContract.MonitorPlanEvent
+import com.yapp.growth.presentation.ui.main.monitor.MonitorPlanContract.MonitorPlanSideEffect
+import com.yapp.growth.presentation.ui.main.monitor.MonitorPlanContract.MonitorPlanViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +28,8 @@ class MonitorPlanViewModel @Inject constructor(
     MonitorPlanViewState()
 ) {
 
-    private var originalTable: TimeTable = TimeTable(emptyList(),
+    private var originalTable: TimeTable = TimeTable(
+        emptyList(),
         emptyList(),
         0,
         emptyList(),
@@ -39,7 +42,8 @@ class MonitorPlanViewModel @Inject constructor(
         emptyList(),
         "",
         "",
-        Category(0, "", ""))
+        Category(0, "", "")
+    )
     private var currentIndex = 0
     private val planId: Long = savedStateHandle.get<Long>(KEY_PLAN_ID) ?: -1L
 
@@ -58,16 +62,22 @@ class MonitorPlanViewModel @Inject constructor(
                     val sliceTimeTable: TimeTable = if (it.availableDates.size >= 4) {
                         it.copy(availableDates = it.availableDates.subList(0, 4))
                     } else {
-                        it.copy(availableDates = it.availableDates.subList(0,
-                            it.availableDates.size))
+                        it.copy(
+                            availableDates = it.availableDates.subList(
+                                0,
+                                it.availableDates.size
+                            )
+                        )
                     }
-                    updateState { copy(
+                    updateState {
+                        copy(
                             respondents = it.users,
                             timeTable = sliceTimeTable,
                             enablePrev = false,
                             enableNext = originalTable.availableDates.size > 4,
                             loadState = LoadState.SUCCESS
-                    ) }
+                        )
+                    }
                 }
                 .onError {
                     updateState { copy(loadState = LoadState.ERROR) }
@@ -124,7 +134,11 @@ class MonitorPlanViewModel @Inject constructor(
             )
         )
         updateState {
-            copy(enablePrev = true, enableNext = toIndex < originalTable.availableDates.size, timeTable = sliceCreateTimeTable)
+            copy(
+                enablePrev = true,
+                enableNext = toIndex < originalTable.availableDates.size,
+                timeTable = sliceCreateTimeTable
+            )
         }
     }
 
@@ -142,7 +156,11 @@ class MonitorPlanViewModel @Inject constructor(
             )
         )
         updateState {
-            copy(enablePrev = currentIndex != 0, enableNext = true, timeTable = sliceCreateTimeTable)
+            copy(
+                enablePrev = currentIndex != 0,
+                enableNext = true,
+                timeTable = sliceCreateTimeTable
+            )
         }
     }
 
@@ -163,18 +181,24 @@ class MonitorPlanViewModel @Inject constructor(
                 previousDay()
                 sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
             }
-            MonitorPlanEvent.OnClickExitIcon -> sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
+            MonitorPlanEvent.OnClickExitButton -> sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
+            MonitorPlanEvent.OnClickUserButton -> {
+                updateState { copy(bottomSheet = MonitorPlanViewState.BottomSheet.RESPONDENT) }
+                sendEffect({ MonitorPlanSideEffect.ShowBottomSheet })
+            }
             is MonitorPlanEvent.OnClickTimeTable -> {
-                updateState { copy(
-                    bottomSheet = MonitorPlanViewState.BottomSheet.PARTICIPANT,
-                    currentClickTimeIndex = event.dateIndex to event.minuteIndex
-                ) }
+                updateState {
+                    copy(
+                        bottomSheet = MonitorPlanViewState.BottomSheet.PARTICIPANT,
+                        currentClickTimeIndex = event.dateIndex to event.minuteIndex
+                    )
+                }
                 sendEffect({ MonitorPlanSideEffect.ShowBottomSheet })
                 filterCurrentSelectedUser(event.dateIndex, event.minuteIndex)
             }
             MonitorPlanEvent.OnClickErrorRetryButton -> loadRespondUsers(planId)
             MonitorPlanEvent.OnClickAvailableColorBox -> {
-                updateState { copy(bottomSheet = MonitorPlanViewState.BottomSheet.RESPONDENT) }
+                updateState { copy(bottomSheet = MonitorPlanViewState.BottomSheet.PARTICIPANT) }
                 sendEffect({ MonitorPlanSideEffect.ShowBottomSheet })
             }
         }
