@@ -1,18 +1,26 @@
 package com.yapp.growth.presentation.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.yapp.growth.domain.entity.TimeTable
@@ -110,6 +118,7 @@ fun PlanzParticipantBottomSheetContent(
 fun PlanzRespondentBottomSheetContent(
     promisingName: String,
     respondents: List<User>,
+    onExitClick: () -> Unit,
 ) {
     val respondentText = StringBuilder()
     respondents.forEachIndexed { index, user ->
@@ -120,33 +129,51 @@ fun PlanzRespondentBottomSheetContent(
         }
     }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.White)
-            .padding(horizontal = 20.dp)
-            .padding(top = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(start = 20.dp, end = 16.dp),
     ) {
-        Row {
-            Text(
-                text = promisingName,
-                style = PlanzTypography.subtitle1,
-                color = MainPurple900
-            )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Column(
+                modifier = Modifier.padding(top = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row {
+                    Text(
+                        text = promisingName,
+                        style = PlanzTypography.subtitle1,
+                        color = MainPurple900
+                    )
 
-            Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
 
-            Text(
-                text = stringResource(R.string.planz_component_respondent_bottom_sheet_content_party_member),
-                style = PlanzTypography.subtitle1,
-                color = Gray800
+                    Text(
+                        text = stringResource(R.string.planz_component_respondent_bottom_sheet_content_party_member),
+                        style = PlanzTypography.subtitle1,
+                        color = Gray800
+                    )
+                }
+
+                Text(
+                    text = respondentText.toString(),
+                    style = PlanzTypography.caption,
+                    color = Gray800
+                )
+            }
+
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_exit_24),
+                tint = Color.Unspecified,
+                contentDescription = null,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(30.dp))
+                    .clickable { onExitClick() }
             )
         }
-        Text(
-            text = respondentText.toString(),
-            style = PlanzTypography.caption,
-            color = Gray800
-        )
     }
 }

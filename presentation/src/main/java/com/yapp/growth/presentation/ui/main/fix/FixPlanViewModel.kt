@@ -159,7 +159,8 @@ class FixPlanViewModel @Inject constructor(
                 filterCurrentSelectedUser(event.dateIndex, event.minuteIndex)
             }
             FixPlanEvent.OnClickErrorRetryButton -> loadRespondUsers(planId = planId)
-            FixPlanEvent.OnClickUserIcon -> {
+            FixPlanEvent.OnClickExitButton -> sendEffect({ FixPlanSideEffect.HideBottomSheet })
+            FixPlanEvent.OnClickUserButton -> {
                 updateState {
                     copy(bottomSheet = FixPlanViewState.BottomSheet.RESPONDENT)
                 }

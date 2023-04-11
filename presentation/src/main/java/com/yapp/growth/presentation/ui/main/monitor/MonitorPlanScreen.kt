@@ -42,7 +42,8 @@ fun MonitorPlanScreen(
             if (uiState.bottomSheet == MonitorPlanContract.MonitorPlanViewState.BottomSheet.RESPONDENT) {
                 PlanzRespondentBottomSheetContent(
                     promisingName = uiState.timeTable.promisingName,
-                    respondents = uiState.respondents
+                    respondents = uiState.respondents,
+                    onExitClick = { viewModel.setEvent(MonitorPlanEvent.OnClickExitButton) }
                 )
             } else {
                 PlanzParticipantBottomSheetContent(
@@ -60,7 +61,7 @@ fun MonitorPlanScreen(
                     title = if (uiState.loadState == LoadState.SUCCESS) uiState.timeTable.promisingName else stringResource(
                         R.string.monitor_plan_title
                     ),
-                    onClickUserIcon = { viewModel.setEvent(MonitorPlanEvent.OnClickUserIcon) },
+                    onClickUserIcon = { viewModel.setEvent(MonitorPlanEvent.OnClickUserButton) },
                     onClickShareIcon = {
                         onDynamicLinkClick(
                             context = context,

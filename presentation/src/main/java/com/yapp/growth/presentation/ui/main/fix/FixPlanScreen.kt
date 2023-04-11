@@ -38,7 +38,8 @@ fun FixPlanScreen(
             if (uiState.bottomSheet == FixPlanContract.FixPlanViewState.BottomSheet.RESPONDENT) {
                 PlanzRespondentBottomSheetContent(
                     promisingName = uiState.timeTable.promisingName,
-                    respondents = uiState.respondents
+                    respondents = uiState.respondents,
+                    onExitClick = { viewModel.setEvent(FixPlanEvent.OnClickExitButton) }
                 )
             } else {
                 PlanzParticipantBottomSheetContent(
@@ -57,7 +58,7 @@ fun FixPlanScreen(
                 PlanzUserAndShareAppBar(
                     title = if (uiState.loadState == LoadState.SUCCESS) uiState.timeTable.promisingName else stringResource(R.string.fix_plan_title),
                     onClickBackIcon = { viewModel.setEvent(FixPlanEvent.OnClickBackButton) },
-                    onClickUserIcon = { viewModel.setEvent(FixPlanEvent.OnClickUserIcon) },
+                    onClickUserIcon = { viewModel.setEvent(FixPlanEvent.OnClickUserButton) },
                     onClickShareIcon = { onDynamicLinkClick(context = context, id = uiState.planId.toString()) }
                 )
             }

@@ -181,8 +181,8 @@ class MonitorPlanViewModel @Inject constructor(
                 previousDay()
                 sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
             }
-            MonitorPlanEvent.OnClickExitIcon -> sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
-            MonitorPlanEvent.OnClickUserIcon -> {
+            MonitorPlanEvent.OnClickExitButton -> sendEffect({ MonitorPlanSideEffect.HideBottomSheet })
+            MonitorPlanEvent.OnClickUserButton -> {
                 updateState { copy(bottomSheet = MonitorPlanViewState.BottomSheet.RESPONDENT) }
                 sendEffect({ MonitorPlanSideEffect.ShowBottomSheet })
             }
