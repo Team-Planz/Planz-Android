@@ -180,7 +180,8 @@ private fun PlanzColorTextAppBar(
 
             Row(
                 modifier = Modifier.align(Alignment.CenterEnd),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 actionMenus.forEachIndexed { index, menu ->
                     Icon(
