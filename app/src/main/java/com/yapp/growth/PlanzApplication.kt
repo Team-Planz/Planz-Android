@@ -2,6 +2,7 @@ package com.yapp.growth
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
+import com.yapp.growth.app.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 

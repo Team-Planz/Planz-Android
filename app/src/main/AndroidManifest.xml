@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yapp.growth">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".PlanzApplication"
+        android:name="com.yapp.growth.PlanzApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${appName}"
@@ -13,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Growth">
         <activity
-            android:name=".presentation.ui.splash.SplashActivity"
+            android:name="com.yapp.growth.presentation.ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Growth.Splash"
             android:screenOrientation="portrait">
@@ -28,16 +27,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="app.planz.today"
-                    android:scheme="https"/>
+                <data android:scheme="https"/>
+                <data android:host="app.planz.today"/>
 
-                <data
-                    android:host="app.planz.today"
-                    android:scheme="http"/>
+                <data android:scheme="http"/>
+                <data android:host="app.planz.today"/>
 
-                <data android:host="kakaolink"
-                    android:scheme="kakao${KAKAO_APP_KEY}" />
+                <data android:scheme="kakao${KAKAO_APP_KEY}"/>
+                <data android:host="kakaolink"/>
             </intent-filter>
         </activity>
 
@@ -57,19 +54,19 @@
         </activity>
 
         <activity
-            android:name=".presentation.ui.main.MainActivity"
+            android:name="com.yapp.growth.presentation.ui.main.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Growth"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".presentation.ui.login.LoginActivity"
+            android:name="com.yapp.growth.presentation.ui.login.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.Growth"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".presentation.ui.createPlan.CreatePlanActivity"
+            android:name="com.yapp.growth.presentation.ui.createPlan.CreatePlanActivity"
             android:exported="false"
             android:theme="@style/Theme.Growth"
             android:screenOrientation="portrait"/>
