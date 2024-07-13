@@ -9,13 +9,17 @@ plugins {
 }
 
 android {
+    namespace = "com.yapp.growth.data"
     compileSdk = Configs.COMPILE_SDK
     defaultConfig {
         minSdk = Configs.MIN_SDK
-        targetSdk = Configs.TARGET_SDK
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
